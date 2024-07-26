@@ -75,9 +75,8 @@ public extension CollectionReference {
   ///
   /// See `Firestore.Encoder` for more details about the encoding process.
   ///
-  /// - Parameters:
-  ///   - value: An instance of `Encodable` to be encoded to a document.
-  ///   - Throws: `Error` if the backend rejected the write.
+  /// - Parameter from: instance of `Encodable` to be encoded to a document.
+  /// - Throws: `Error` if the backend rejected the write.
   /// - Returns: A `DocumentReference` pointing to the newly created document.
   @discardableResult
   func addDocument<T: Encodable>(from value: T) async throws
