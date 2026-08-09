@@ -38,6 +38,8 @@ NSString *const FIRCLSDataCollectionEnabledKey = @"com.crashlytics.data_collecti
 // collection in their Info.plist, and can be overridden by setting it to true using
 // the setCrashlyticsCollectionEnabled API.
 NSString *const FIRCLSCrashlyticsCollectionKey = @"FirebaseCrashlyticsCollectionEnabled";
+NSString *const FIRCLSCrashReporterExtensionEnabledKey =
+    @"FirebaseCrashlyticsCrashReporterExtensionEnabled";
 
 typedef NS_ENUM(NSInteger, FIRCLSDataCollectionSetting) {
   FIRCLSDataCollectionSettingNotSet = 0,
@@ -107,6 +109,17 @@ typedef NS_ENUM(NSInteger, FIRCLSDataCollectionSetting) {
 - (BOOL)isCrashlyticsCollectionEnabled {
   return [FIRCLSDataCollectionArbiter isCrashlyticsCollectionEnabledWithApp:_app
                                                                 withAppInfo:_appInfo];
+}
+
+- (BOOL)isCrashReporterExtensionEnabled {
+  if (![self isCrashlyticsCollectionEnabled]) {
+    return NO;
+  }
+  id enabled = [_appInfo objectForKey:FIRCLSCrashReporterExtensionEnabledKey];
+  if ([enabled isKindOfClass:[NSString class]] || [enabled isKindOfClass:[NSNumber class]]) {
+    return [enabled boolValue];
+  }
+  return YES;
 }
 
 - (void)setCrashlyticsCollectionEnabled:(BOOL)enabled {

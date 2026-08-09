@@ -290,6 +290,10 @@ NSString *const FIRCLSGoogleTransportMappingID = @"1206";
   return [self.dataArbiter isCrashlyticsCollectionEnabled];
 }
 
+- (BOOL)isCrashReporterExtensionEnabled {
+  return [self.dataArbiter isCrashReporterExtensionEnabled];
+}
+
 #pragma mark - API: didCrashDuringPreviousExecution
 
 - (BOOL)didCrashDuringPreviousExecution {

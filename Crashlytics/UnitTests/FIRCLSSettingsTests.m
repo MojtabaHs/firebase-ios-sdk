@@ -105,6 +105,7 @@ NSString *const TestChangedGoogleAppID = @"2:changed:google:app:id";
   XCTAssertTrue(self.settings.errorReportingEnabled);
   XCTAssertTrue(self.settings.customExceptionsEnabled);
   XCTAssertFalse(self.settings.metricKitCollectionEnabled);
+  XCTAssertTrue(self.settings.crashReporterExtensionEnabled);
   XCTAssertFalse(self.settings.machExceptionDefaultBehavior);
 
   XCTAssertEqual(self.settings.errorLogBufferSize, 64 * 1000);
@@ -517,6 +518,27 @@ NSString *const TestChangedGoogleAppID = @"2:changed:google:app:id";
                   appInfo:appInfoWithSettingFalse
             deletionQueue:dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)];
   XCTAssertFalse(self.settings.machExceptionDefaultBehavior);
+}
+
+- (void)testCrashReporterExtensionEnabled {
+  NSString *const FirebaseCrashlyticsCrashReporterExtensionEnabledKey =
+      @"FirebaseCrashlyticsCrashReporterExtensionEnabled";
+
+  NSDictionary *appInfoWithSetting = @{FirebaseCrashlyticsCrashReporterExtensionEnabledKey : @YES};
+  _settings = [[FIRCLSSettings alloc]
+      initWithFileManager:_fileManager
+               appIDModel:_appIDModel
+                  appInfo:appInfoWithSetting
+            deletionQueue:dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)];
+  XCTAssertTrue(self.settings.crashReporterExtensionEnabled);
+
+  NSDictionary *appInfoWithSettingFalse = @{FirebaseCrashlyticsCrashReporterExtensionEnabledKey : @NO};
+  _settings = [[FIRCLSSettings alloc]
+      initWithFileManager:_fileManager
+               appIDModel:_appIDModel
+                  appInfo:appInfoWithSettingFalse
+            deletionQueue:dispatch_get_global_queue(QOS_CLASS_USER_INTERACTIVE, 0)];
+  XCTAssertFalse(self.settings.crashReporterExtensionEnabled);
 }
 
 @end

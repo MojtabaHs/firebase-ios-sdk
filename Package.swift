@@ -564,7 +564,8 @@ let package = Package(
     .target(
       name: "FirebaseCrashlyticsSwift",
       dependencies: ["FirebaseRemoteConfigInterop"],
-      path: "Crashlytics/Crashlytics/Rollouts"
+      path: "Crashlytics/Crashlytics",
+      sources: ["Rollouts", "CrashReporterExtension"]
     ),
     .testTarget(
       name: "FirebaseCrashlyticsSwiftUnit",

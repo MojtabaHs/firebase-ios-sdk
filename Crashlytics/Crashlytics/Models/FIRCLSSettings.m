@@ -32,6 +32,8 @@ NSString *const BuildInstanceID = @"build_instance_id";
 NSString *const AppVersion = @"app_version";
 NSString *const FirebaseCrashlyticsMachDefaultBehaviorKey =
     @"FirebaseCrashlyticsMachDefaultBehavior";
+NSString *const FirebaseCrashlyticsCrashReporterExtensionEnabledKey =
+    @"FirebaseCrashlyticsCrashReporterExtensionEnabled";
 
 @interface FIRCLSSettings ()
 
@@ -315,6 +317,23 @@ NSString *const FirebaseCrashlyticsMachDefaultBehaviorKey =
   }
 
   return NO;
+}
+
+- (BOOL)crashReporterExtensionEnabled {
+  NSNumber *value = [self featuresSettings][@"collect_crash_reporter_extension"];
+
+  if (value != nil) {
+    return value.boolValue;
+  }
+
+  id crashlyticsCrashReporterExt =
+      [self.appInfo objectForKey:FirebaseCrashlyticsCrashReporterExtensionEnabledKey];
+  if ([crashlyticsCrashReporterExt isKindOfClass:[NSString class]] ||
+      [crashlyticsCrashReporterExt isKindOfClass:[NSNumber class]]) {
+    return [crashlyticsCrashReporterExt boolValue];
+  }
+
+  return YES;
 }
 
 #pragma mark - Optional Limit Overrides

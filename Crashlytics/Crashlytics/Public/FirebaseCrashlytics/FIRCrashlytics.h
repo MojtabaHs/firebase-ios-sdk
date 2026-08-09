@@ -178,6 +178,11 @@ NS_SWIFT_NAME(Crashlytics)
 - (BOOL)isCrashlyticsCollectionEnabled;
 
 /**
+ * Indicates whether processing crash reports from Apple's CrashReporterExtension is enabled.
+ */
+- (BOOL)isCrashReporterExtensionEnabled;
+
+/**
  * Determines whether there are any unsent crash reports cached on the device, then calls the given
  * callback.
  *

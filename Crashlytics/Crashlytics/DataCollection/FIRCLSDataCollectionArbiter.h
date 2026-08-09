@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)isCrashlyticsCollectionEnabled;
 
+- (BOOL)isCrashReporterExtensionEnabled;
+
 - (void)setCrashlyticsCollectionEnabled:(BOOL)enabled;
 
 // Returns a promise that is fulfilled once data collection is enabled.

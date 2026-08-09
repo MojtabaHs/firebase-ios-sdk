@@ -91,6 +91,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, readonly) BOOL metricKitCollectionEnabled;
 
 /**
+ * When this is true, Crashlytics will process crash reports from Apple's CrashReporterExtension
+ */
+@property(nonatomic, readonly) BOOL crashReporterExtensionEnabled;
+
+/**
  * Returns the maximum number of custom exception events that will be
  * recorded in a session.
  */
